@@ -1,5 +1,5 @@
 export * from "./util/search-params";
-export * from 'request/posts';
+export * from './request/posts';
 export * from "./request/auth";
 export * from './schema';
 export * from "./request/terms";
