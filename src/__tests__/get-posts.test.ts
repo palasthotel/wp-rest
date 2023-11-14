@@ -1,10 +1,11 @@
+import { expect, test, describe } from 'vitest'
 import {getPostsRequest} from "../request/posts";
 
 const baseUrl = "https://www.palasthotel.de/";
 
 describe('Basic requests', () => {
 
-    it("Should be a simple get posts request", ()=>{
+    test("Should be a simple get posts request", ()=>{
         const url = getPostsRequest({
             baseUrl: "https://www.palasthotel.de/",
         });
@@ -13,7 +14,7 @@ describe('Basic requests', () => {
         ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts`)
     });
 
-    it("Should get post types", ()=>{
+    test("Should get post types", ()=>{
         const basic = {
             baseUrl: "https://www.palasthotel.de/",
         }
@@ -42,7 +43,7 @@ describe('Basic requests', () => {
 
 describe('Pagination', () => {
 
-    it("Should get page 2", ()=>{
+    test("Should get page 2", ()=>{
 
         const url = getPostsRequest({
             baseUrl: "https://www.palasthotel.de/",
@@ -55,7 +56,7 @@ describe('Pagination', () => {
     });
 
 
-    it("Should get per_page 4", ()=>{
+    test("Should get per_page 4", ()=>{
 
         const url = getPostsRequest({
             baseUrl: "https://www.palasthotel.de/",
@@ -70,7 +71,7 @@ describe('Pagination', () => {
 
 describe('Taxonomies', () => {
 
-    it("Should get posts by category", ()=>{
+    test("Should get posts by category", ()=>{
 
         const basic = getPostsRequest({
             baseUrl,
@@ -96,7 +97,7 @@ describe('Taxonomies', () => {
 
     })
 
-    it("Should get posts by tags", ()=>{
+    test("Should get posts by tags", ()=>{
 
         const url = getPostsRequest({
             baseUrl: "https://www.palasthotel.de/",
@@ -111,7 +112,7 @@ describe('Taxonomies', () => {
         ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?tags[operator]=AND&tags[terms]=1,2`)
     });
 
-    it("Should get posts by custom tax", ()=>{
+    test("Should get posts by custom tax", ()=>{
 
         const url = getPostsRequest({
             baseUrl: "https://www.palasthotel.de/",

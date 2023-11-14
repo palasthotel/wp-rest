@@ -1,6 +1,6 @@
 import {BaseRequestArgs, PostId, TaxonomySlug, TermId} from "./general";
 import {z} from "zod";
-import {commentResponseSchema, termResponseSchema} from "../schema";
+import {termResponseSchema} from "../schema";
 
 export type GetTermsRequestArgs = BaseRequestArgs & {
     taxonomy?: TaxonomySlug

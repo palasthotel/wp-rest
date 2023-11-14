@@ -9,7 +9,7 @@ export * from "./request/users";
 export * from "./util/hierarchy";
 export * from "./util/response-headers";
 
-// export type * from './@types/general';
-// export type * from './@types/posts';
-// export type * from './@types/terms';
-// export type * from './@types/revisions';
+export type * from './@types/general';
+export type * from './@types/posts';
+export type * from './@types/terms';
+export type * from './@types/revisions';
