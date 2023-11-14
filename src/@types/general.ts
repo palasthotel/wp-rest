@@ -31,3 +31,15 @@ export type Hierarchy<T> = {
     item: T
     children: Hierarchy<T>[]
 }
+
+type ErrorResponse = {
+    success: false;
+    errors: string[];
+}
+
+type SuccessResponse<T> = {
+    success: true;
+    data: T;
+}
+
+export type SafeResponse<T> = SuccessResponse<T> | ErrorResponse

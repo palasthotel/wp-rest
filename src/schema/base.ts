@@ -1,9 +1,8 @@
 import {z} from "zod"
 
+export const postDateSchema = z.string()
 export const postIdSchema = z.number()
-
 export const postSlugSchema = z.string()
-
 export const postTypeSchema = z.string()
 export const postStatusSchema = z.union([
     z.literal("auto-draft"),

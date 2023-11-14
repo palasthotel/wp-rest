@@ -1,4 +1,6 @@
 import {BaseRequestArgs, PostId, TaxonomySlug, TermId} from "./general";
+import {z} from "zod";
+import {commentResponseSchema, termResponseSchema} from "../schema";
 
 export type GetTermsRequestArgs = BaseRequestArgs & {
     taxonomy?: TaxonomySlug
@@ -13,6 +15,8 @@ export type GetTermsRequestArgs = BaseRequestArgs & {
     post?: PostId
     slug?: string
 }
+
+export type TermResponse = z.infer<typeof termResponseSchema>
 
 
 export type GetTermByIdRequestArgs = BaseRequestArgs & {

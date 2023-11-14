@@ -3,7 +3,7 @@ import {
     authorIdSchema,
     commentStatusSchema,
     entityMetaSchema,
-    pingStatusSchema,
+    pingStatusSchema, postDateSchema,
     postFormatSchema,
     postIdSchema,
     postSlugSchema,
@@ -14,13 +14,13 @@ import {getCollectionResponseSchema} from "./collection";
 
 export const postResponseSchema = z.object({
     id: postIdSchema, // posts, pages
-    date: z.string().datetime(), // posts, pages
-    date_gmt: z.string().datetime(), // posts, pages
+    date: postDateSchema, // posts, pages
+    date_gmt: postDateSchema, // posts, pages
     guid: z.object({ // posts, pages
         rendered: z.string()
     }),
-    modified: z.string().datetime(), // posts, pages
-    modified_gmt: z.string().datetime(), // posts, pages
+    modified: postDateSchema, // posts, pages
+    modified_gmt: postDateSchema, // posts, pages
     slug: postSlugSchema, // posts, pages
     status: postStatusSchema, // posts, pages
     type: postTypeSchema, // posts, pages

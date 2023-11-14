@@ -1,8 +1,6 @@
-import {ZodSchema} from "zod";
 import {GetPostByIdRequestArgs, GetPostsRequestArgs} from "../@types/posts";
 import {trimEndSlash} from "../util/string";
 import {SearchParamable, setupSearchParams} from "../util/search-params";
-import {getPostsResponseSchema, postResponseSchema} from "../schema";
 
 export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => {
 
@@ -19,14 +17,6 @@ export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => 
     return url;
 }
 
-export const asPostsResponse = (post: ZodSchema = postResponseSchema) => async (res: Response) => {
-    return getPostsResponseSchema(post).parse({
-        data: await res.json(),
-        total: parseInt(res.headers.get("x-wp-total") ?? "0"),
-        totalPages: parseInt(res.headers.get("x-wp-totalpages") ?? "0")
-    });
-}
-
 export const getPostRequest = (
     args: GetPostByIdRequestArgs,
 ): URL => {
@@ -37,8 +27,3 @@ export const getPostRequest = (
     } = args;
     return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}/${id}`);
 }
-
-export const asPostResponse = (post: ZodSchema = postResponseSchema)=> async (res: Response) => {
-    return post.parse(await res.json());
-}
-

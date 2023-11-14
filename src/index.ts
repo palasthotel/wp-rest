@@ -1,9 +1,13 @@
-import {setupSearchParams, addTaxonomyQuery} from "./util/search-params";
-import {asPostResponse, asPostsResponse, getPostRequest, getPostsRequest} from 'request/posts';
+import {addTaxonomyQuery, setupSearchParams} from "./util/search-params";
+import {getPostRequest, getPostsRequest} from 'request/posts';
 import {authorizationHeaders} from "./util/auth";
 import * as schema from './schema';
-import {asTermResponse, asTermsResponse, getTermRequest, getTermsRequest} from "./request/terms";
-import {asRevisionResponse, asRevisionsResponse, getRevisionByIdRequest, getRevisionsRequest} from "./request/revision";
+import {getTermRequest, getTermsRequest} from "./request/terms";
+import {getRevisionByIdRequest, getRevisionsRequest} from "./request/revision";
+import {getCommentRequest, getCommentsRequest} from "./request/comments";
+import {getUserRequest, getUsersRequest} from "./request/users";
+import {commentsAsHierarchy, postsAsHierarchy, termsAsHierarchy} from "./util/hierarchy";
+import {getPaginationHeaders} from "./util/response-headers";
 
 export default {
     searchParams: {
@@ -11,7 +15,12 @@ export default {
         addTaxonomyQuery,
     },
     headers: {
-        authorization: authorizationHeaders,
+        request: {
+            authorization: authorizationHeaders,
+        },
+        response: {
+            pagination: getPaginationHeaders,
+        }
     },
     request: {
         posts: {
@@ -26,14 +35,19 @@ export default {
             get: getTermRequest,
             getAll: getTermsRequest,
         },
+        comments: {
+            get: getCommentRequest,
+            getAll: getCommentsRequest,
+        },
+        users: {
+            get: getUserRequest,
+            getAll: getUsersRequest,
+        }
     },
-    resolve: {
-        asPostResponse,
-        asPostsResponse,
-        asTermResponse,
-        asTermsResponse,
-        asRevisionsResponse,
-        asRevisionResponse,
+    asHierarchy: {
+        posts: postsAsHierarchy,
+        terms: termsAsHierarchy,
+        comments: commentsAsHierarchy,
     },
     schema,
 }
