@@ -1,6 +1,6 @@
 {
   "name": "@palasthotel/wp-rest",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Types and request builder functions.",
   "type": "module",
   "main": "./dist/wp-rest.umd.cjs",
