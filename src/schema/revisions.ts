@@ -1,6 +1,5 @@
-import {z, ZodSchema} from "zod";
+import {z} from "zod";
 import {postResponseSchema} from "./posts";
-import {getCollectionResponseSchema} from "./collection";
 import {revisionIdSchema} from "./base";
 
 export const revisionResponseSchema = z.object({
@@ -19,6 +18,3 @@ export const revisionResponseSchema = z.object({
         excerpt: true,
     })
 )
-
-export const getRevisionsResponseSchema = (revision: ZodSchema = revisionResponseSchema) =>
-    getCollectionResponseSchema(revision)

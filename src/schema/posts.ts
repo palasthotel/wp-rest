@@ -1,16 +1,16 @@
-import {z, ZodSchema} from "zod";
+import {z} from "zod";
 import {
     authorIdSchema,
     commentStatusSchema,
     entityMetaSchema,
-    pingStatusSchema, postDateSchema,
+    pingStatusSchema,
+    postDateSchema,
     postFormatSchema,
     postIdSchema,
     postSlugSchema,
     postStatusSchema,
     postTypeSchema
 } from "./base";
-import {getCollectionResponseSchema} from "./collection";
 
 export const postResponseSchema = z.object({
     id: postIdSchema, // posts, pages
@@ -59,5 +59,3 @@ export const postResponseSchema = z.object({
         )
     )
 });
-
-export const getPostsResponseSchema = (post: ZodSchema = postResponseSchema) => getCollectionResponseSchema(post);

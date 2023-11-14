@@ -1,9 +1,7 @@
-import {z, ZodSchema} from "zod";
+import {z} from "zod";
 
-export const getCollectionResponseSchema = (item: ZodSchema) => {
-    return z.object({
-        data: z.array(item),
-        total: z.number().gte(0),
-        totalPages: z.number().gte(0),
-    });
-}
+export const collectionResponseSchema = z.object({
+    data: z.array(z.any()),
+    total: z.number().gte(0),
+    totalPages: z.number().gte(0),
+});

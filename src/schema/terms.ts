@@ -1,6 +1,5 @@
-import {z, ZodSchema} from "zod";
+import {z} from "zod";
 import {entityMetaSchema, taxonomySlugSchema, termIdSchema} from "./base";
-import {getCollectionResponseSchema} from "./collection";
 
 export const termResponseSchema = z.object({
     id: termIdSchema,
@@ -13,5 +12,3 @@ export const termResponseSchema = z.object({
     parent: termIdSchema.optional(),
     meta: entityMetaSchema
 });
-
-export const getTermsResponseSchema = (term: ZodSchema = termResponseSchema) => getCollectionResponseSchema(term);

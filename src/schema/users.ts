@@ -1,6 +1,5 @@
-import {z, ZodSchema} from "zod";
+import {z} from "zod";
 import {entityMetaSchema, userIdSchema, userSlugSchema} from "./base";
-import {getCollectionResponseSchema} from "./collection";
 
 export const userResponseSchema = z.object({
     id: userIdSchema,
@@ -19,5 +18,3 @@ export const userResponseSchema = z.object({
         )
     )
 });
-
-export const getUsersResponseSchema = (user: ZodSchema = userResponseSchema) => getCollectionResponseSchema(user);
