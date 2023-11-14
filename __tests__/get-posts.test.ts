@@ -127,3 +127,27 @@ describe('Taxonomies', () => {
     });
 });
 
+describe('Array values', () => {
+    test("Should add string array properly", ()=>{
+
+        const url = getPostsRequest({
+            baseUrl,
+            my_arg: ["test","test2"]
+        });
+
+        expect(
+            decodeURIComponent(url.toString())
+        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?my_arg[]=test&my_arg[]=test2`)
+    })
+    test("Should add number array properly", ()=>{
+
+        const url = getPostsRequest({
+            baseUrl,
+            my_arg: [1,2]
+        });
+
+        expect(
+            decodeURIComponent(url.toString())
+        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?my_arg[]=1&my_arg[]=2`)
+    })
+});

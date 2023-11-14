@@ -2,13 +2,17 @@ import {TaxonomyQuery} from "../@types/general";
 import {isTaxonomyQueryArg} from "./type-guard";
 
 export type SearchParamable = {
-    [key: string]: string|number|boolean|TaxonomyQuery
+    [key: string]: string|string[]|number|number[]|boolean|TaxonomyQuery
 }
 
 export const searchParamsAdd = (searchParams: URLSearchParams, params: SearchParamable) => {
     Object.entries(params).forEach(([key, value]) => {
-        if(isTaxonomyQueryArg(value)){
+        if(isTaxonomyQueryArg(value)) {
             searchParamsAddTaxonomyQuery(searchParams, key, value);
+        } else if(Array.isArray(value)) {
+            value.forEach(v => {
+                searchParams.append(`${key}[]`, `${v}`);
+            })
         } else {
             searchParams.append(key, value+"");
         }
