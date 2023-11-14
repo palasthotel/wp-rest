@@ -1,5 +1,4 @@
-import { expect, test, describe } from 'vitest'
-import {getPostsRequest} from "../request/posts";
+import {getPostsRequest} from "../src";
 
 const baseUrl = "https://www.palasthotel.de/";
 

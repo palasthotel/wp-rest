@@ -1,5 +1,4 @@
-import { expect, test } from 'vitest'
-import {postDateSchema} from "../schema";
+import {postDateSchema} from "../src";
 
 test("Should parse successfully", ()=>{
 

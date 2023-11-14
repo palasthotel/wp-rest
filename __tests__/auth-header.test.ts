@@ -1,5 +1,4 @@
-import { expect, test } from 'vitest'
-import {authorizationHeaders} from "../request/auth";
+import {authorizationHeaders} from "../src";
 
 test("Should add auth header", ()=> {
     const value = authorizationHeaders("my","pass");
