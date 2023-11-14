@@ -11,10 +11,14 @@ export const searchParamsAdd = (searchParams: URLSearchParams, params: SearchPar
             searchParamsAddTaxonomyQuery(searchParams, key, value);
         } else if(Array.isArray(value)) {
             value.forEach(v => {
-                searchParams.append(`${key}[]`, `${v}`);
+                if(typeof v == "string" || typeof v == "number") {
+                    searchParams.append(`${key}[]`, `${v}`);
+                }
             })
-        } else {
+        } else if(typeof value == "string" || typeof value == "number" || typeof value == "boolean") {
             searchParams.append(key, value+"");
+        } else {
+            console.warn("wp-rest: Could not add search param ", key, value);
         }
     });
 }

@@ -79,7 +79,7 @@ describe('Taxonomies', () => {
 
         expect(
             decodeURIComponent(basic.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?categories=1,2`)
+        ).toEqual(`${baseUrl}wp-json/wp/v2/posts?categories=1,2`)
 
         const url = getPostsRequest({
             baseUrl,
@@ -91,7 +91,7 @@ describe('Taxonomies', () => {
 
         expect(
             decodeURIComponent(url.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?categories[operator]=AND&categories[terms]=1,2`);
+        ).toEqual(`${baseUrl}wp-json/wp/v2/posts?categories[operator]=AND&categories[terms]=1,2`);
 
 
     })
@@ -99,7 +99,7 @@ describe('Taxonomies', () => {
     test("Should get posts by tags", ()=>{
 
         const url = getPostsRequest({
-            baseUrl: "https://www.palasthotel.de/",
+            baseUrl,
             tags: {
                 operator: "AND",
                 terms: [1,2]
@@ -108,13 +108,13 @@ describe('Taxonomies', () => {
 
         expect(
             decodeURIComponent(url.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?tags[operator]=AND&tags[terms]=1,2`)
+        ).toEqual(`${baseUrl}wp-json/wp/v2/posts?tags[operator]=AND&tags[terms]=1,2`)
     });
 
     test("Should get posts by custom tax", ()=>{
 
         const url = getPostsRequest({
-            baseUrl: "https://www.palasthotel.de/",
+            baseUrl,
             my_taxonomy: {
                 operator: "AND",
                 terms: [1,2]
@@ -123,7 +123,7 @@ describe('Taxonomies', () => {
 
         expect(
             decodeURIComponent(url.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?my_taxonomy[operator]=AND&my_taxonomy[terms]=1,2`)
+        ).toEqual(`${baseUrl}wp-json/wp/v2/posts?my_taxonomy[operator]=AND&my_taxonomy[terms]=1,2`)
     });
 });
 
@@ -137,7 +137,7 @@ describe('Array values', () => {
 
         expect(
             decodeURIComponent(url.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?my_arg[]=test&my_arg[]=test2`)
+        ).toBe(`${baseUrl}wp-json/wp/v2/posts?my_arg[]=test&my_arg[]=test2`)
     })
     test("Should add number array properly", ()=>{
 
@@ -148,6 +148,17 @@ describe('Array values', () => {
 
         expect(
             decodeURIComponent(url.toString())
-        ).toEqual(`https://www.palasthotel.de/wp-json/wp/v2/posts?my_arg[]=1&my_arg[]=2`)
-    })
+        ).toBe(`${baseUrl}wp-json/wp/v2/posts?my_arg[]=1&my_arg[]=2`)
+    });
+
+    test("Should ignore deeply nested values", ()=>{
+       const url = getPostsRequest({
+           baseUrl,
+           my_arg: [{bla:1}]
+       });
+
+       expect(
+           decodeURIComponent(url.toString())
+       ).toBe(`${baseUrl}wp-json/wp/v2/posts`);
+    });
 });
