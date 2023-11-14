@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./dist/wp-rest.umd.cjs",
   "module": "./dist/wp-rest.js",
-  "types": "./dist/wp-rest.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/wp-rest.js",
