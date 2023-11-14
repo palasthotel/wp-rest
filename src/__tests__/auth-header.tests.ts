@@ -1,4 +1,4 @@
-import {authorizationHeaders} from "../util/auth";
+import {authorizationHeaders} from "../request/auth";
 
 it("Should add auth header", ()=> {
     const value = authorizationHeaders("my","pass");

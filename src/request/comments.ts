@@ -1,6 +1,6 @@
 import {GetCommentByIdRequestArgs, GetCommentsRequestArgs} from "../@types/comments";
 import {trimEndSlash} from "../util/string";
-import {SearchParamable, setupSearchParams} from "../util/search-params";
+import {SearchParamable, searchParamsAdd} from "../util/search-params";
 
 export const getCommentsRequest = <T extends GetCommentsRequestArgs>( args: T ) => {
     const {
@@ -10,7 +10,7 @@ export const getCommentsRequest = <T extends GetCommentsRequestArgs>( args: T ) 
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/comments`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }
@@ -26,7 +26,7 @@ export const getCommentRequest = (
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/comments/${id}`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }

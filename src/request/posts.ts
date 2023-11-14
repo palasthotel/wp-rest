@@ -1,6 +1,6 @@
 import {GetPostByIdRequestArgs, GetPostsRequestArgs} from "../@types/posts";
 import {trimEndSlash} from "../util/string";
-import {SearchParamable, setupSearchParams} from "../util/search-params";
+import {SearchParamable, searchParamsAdd} from "../util/search-params";
 
 export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => {
 
@@ -12,7 +12,7 @@ export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => 
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }

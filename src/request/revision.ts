@@ -1,6 +1,6 @@
 import {GetRevisionByIdRequestArgs, GetRevisionsRequestArgs} from "../@types/revisions";
 import {trimEndSlash} from "../util/string";
-import {SearchParamable, setupSearchParams} from "../util/search-params";
+import {SearchParamable, searchParamsAdd} from "../util/search-params";
 
 export const getRevisionsRequest = ( args: GetRevisionsRequestArgs) => {
     const {
@@ -12,7 +12,7 @@ export const getRevisionsRequest = ( args: GetRevisionsRequestArgs) => {
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}/${post}/revisions`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }

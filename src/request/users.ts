@@ -1,5 +1,5 @@
 import {trimEndSlash} from "../util/string";
-import {SearchParamable, setupSearchParams} from "../util/search-params";
+import {SearchParamable, searchParamsAdd} from "../util/search-params";
 import {GetUserRequestArgs, GetUsersRequestArgs} from "../@types/users";
 
 export const getUsersRequest = <T extends GetUsersRequestArgs>(args: T): URL => {
@@ -11,7 +11,7 @@ export const getUsersRequest = <T extends GetUsersRequestArgs>(args: T): URL => 
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/users`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }

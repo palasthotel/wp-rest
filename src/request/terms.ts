@@ -1,6 +1,6 @@
 import {GetTermByIdRequestArgs, GetTermsRequestArgs} from "../@types/terms";
 import {trimEndSlash} from "../util/string";
-import {SearchParamable, setupSearchParams} from "../util/search-params";
+import {SearchParamable, searchParamsAdd} from "../util/search-params";
 
 export const getTermsRequest = <T extends GetTermsRequestArgs>(args: T): URL => {
     const {
@@ -11,7 +11,7 @@ export const getTermsRequest = <T extends GetTermsRequestArgs>(args: T): URL => 
 
     const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${taxonomy}`);
 
-    setupSearchParams(url.searchParams, rest as SearchParamable);
+    searchParamsAdd(url.searchParams, rest as SearchParamable);
 
     return url;
 }
