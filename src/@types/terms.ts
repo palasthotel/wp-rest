@@ -18,7 +18,6 @@ export type GetTermsRequestArgs = BaseRequestArgs & {
 
 export type TermResponse = z.infer<typeof termResponseSchema>
 
-
 export type GetTermByIdRequestArgs = BaseRequestArgs & {
     id: TermId
     taxonomy?: TaxonomySlug

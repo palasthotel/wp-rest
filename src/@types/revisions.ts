@@ -1,4 +1,6 @@
 import {BaseRequestArgs, PostId, PostType, RevisionId} from "./general";
+import {z} from "zod";
+import {revisionResponseSchema} from "../schema";
 
 export type GetRevisionsRequestArgs = BaseRequestArgs & {
     post: PostId
@@ -12,6 +14,8 @@ export type GetRevisionsRequestArgs = BaseRequestArgs & {
     orderby?: "date" | "id" | "include" | "relevance" | "slug" |
         "include_slugs" | "title"
 }
+
+export type RevisionResponse = z.infer<typeof revisionResponseSchema>
 
 export type GetRevisionByIdRequestArgs = BaseRequestArgs & {
     type?: PostType

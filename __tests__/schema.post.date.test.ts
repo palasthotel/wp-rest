@@ -1,7 +1,5 @@
 import {postDateSchema} from "../src";
-
 test("Should parse successfully", ()=>{
-
-    const result = postDateSchema.safeParse("2019-11-30 23:00:09");
+    const result = postDateSchema.safeParse("2023-11-15T05:02:00");
     expect(result.success).toBeTruthy()
-})
+});

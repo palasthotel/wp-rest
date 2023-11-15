@@ -32,12 +32,12 @@ export type Hierarchy<T> = {
     children: Hierarchy<T>[]
 }
 
-type ErrorResponse = {
+export type ErrorResponse = {
     success: false;
     errors: string[];
 }
 
-type SuccessResponse<T> = {
+export type SuccessResponse<T> = {
     success: true;
     data: T;
 }

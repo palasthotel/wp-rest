@@ -1,4 +1,6 @@
 import {BaseRequestArgs, UserId} from "./general";
+import {z} from "zod";
+import {userResponseSchema} from "../schema";
 
 export type GetUsersRequestArgs = BaseRequestArgs & {
     page?: number
@@ -12,6 +14,8 @@ export type GetUsersRequestArgs = BaseRequestArgs & {
     slug?: string
     roles?: string
 }
+
+export type UserResponse = z.infer<typeof userResponseSchema>
 
 export type GetUserRequestArgs = BaseRequestArgs & {
     id: UserId
