@@ -1,7 +1,4 @@
-import {Hierarchy} from "../@types/general";
-import {PostResponse} from "../@types/posts";
-import {TermResponse} from "../@types/terms";
-import {CommentResponse} from "../@types/comments";
+import {CommentResponse, Hierarchy, PostResponse, TermResponse} from "../@types";
 
 export function postsAsHierarchy(
     posts: PostResponse[]

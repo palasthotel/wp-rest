@@ -1,6 +1,5 @@
-import {GetPostByIdRequestArgs, GetPostsRequestArgs} from "../@types/posts";
-import {trimEndSlash} from "../util/string";
-import {SearchParamable, searchParamsAdd} from "../util/search-params";
+import {GetPostByIdRequestArgs, GetPostsRequestArgs} from "../@types";
+import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
 
 export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => {
 

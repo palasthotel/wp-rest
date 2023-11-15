@@ -1,6 +1,5 @@
-import {trimEndSlash} from "../util/string";
-import {SearchParamable, searchParamsAdd} from "../util/search-params";
-import {GetUserRequestArgs, GetUsersRequestArgs} from "../@types/users";
+import {GetUserRequestArgs, GetUsersRequestArgs} from "../@types";
+import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
 
 export const getUsersRequest = <T extends GetUsersRequestArgs>(args: T): URL => {
 

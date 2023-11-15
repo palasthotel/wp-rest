@@ -1,6 +1,5 @@
-import {GetTermByIdRequestArgs, GetTermsRequestArgs} from "../@types/terms";
-import {trimEndSlash} from "../util/string";
-import {SearchParamable, searchParamsAdd} from "../util/search-params";
+import {GetTermByIdRequestArgs, GetTermsRequestArgs} from "../@types";
+import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
 
 export const getTermsRequest = <T extends GetTermsRequestArgs>(args: T): URL => {
     const {

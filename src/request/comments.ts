@@ -1,6 +1,5 @@
-import {GetCommentByIdRequestArgs, GetCommentsRequestArgs} from "../@types/comments";
-import {trimEndSlash} from "../util/string";
-import {SearchParamable, searchParamsAdd} from "../util/search-params";
+import {GetCommentByIdRequestArgs, GetCommentsRequestArgs} from "../@types";
+import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
 
 export const getCommentsRequest = <T extends GetCommentsRequestArgs>( args: T ) => {
     const {

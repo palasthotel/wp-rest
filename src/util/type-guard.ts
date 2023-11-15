@@ -1,4 +1,4 @@
-import {TaxonomyQuery} from "../@types/general";
+import {TaxonomyQuery} from "../@types";
 import {taxonomyQuerySchema} from "../schema";
 
 export const isTaxonomyQueryArg = (arg: any): arg is TaxonomyQuery => {

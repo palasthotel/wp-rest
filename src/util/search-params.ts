@@ -1,4 +1,4 @@
-import {TaxonomyQuery} from "../@types/general";
+import {TaxonomyQuery} from "../@types";
 import {isTaxonomyQueryArg} from "./type-guard";
 
 export type SearchParamable = {

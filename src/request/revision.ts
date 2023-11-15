@@ -1,6 +1,5 @@
-import {GetRevisionByIdRequestArgs, GetRevisionsRequestArgs} from "../@types/revisions";
-import {trimEndSlash} from "../util/string";
-import {SearchParamable, searchParamsAdd} from "../util/search-params";
+import {GetRevisionByIdRequestArgs, GetRevisionsRequestArgs} from "../@types";
+import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
 
 export const getRevisionsRequest = ( args: GetRevisionsRequestArgs) => {
     const {
