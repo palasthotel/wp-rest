@@ -1,11 +1,7 @@
-import {z} from "zod";
 import {postResponseSchema} from "./posts";
 import {revisionIdSchema} from "./base";
 
-export const revisionResponseSchema = z.object({
-    id: revisionIdSchema
-}).and(
-    postResponseSchema.pick({
+export const revisionResponseSchema = postResponseSchema.pick({
         author: true,
         date: true,
         date_gmt: true,
@@ -16,5 +12,6 @@ export const revisionResponseSchema = z.object({
         title: true,
         content: true,
         excerpt: true,
-    })
-)
+}).extend({
+        id: revisionIdSchema
+})
