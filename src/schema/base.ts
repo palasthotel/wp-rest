@@ -39,16 +39,9 @@ export const pingStatusSchema = commentStatusSchema;
 export const comaSeparatedIdsSchema = z.string();
 export const termIdSchema = z.number();
 export const taxonomySlugSchema = z.string();
-export const entityMetaSchema = z.record(
-    z.union([
-        z.string(),
-        z.array(z.string()),
-        z.number(),
-        z.array(z.number()),
-        z.boolean(),
-        z.null(),
-    ])
-).or(z.array(z.unknown()));
+export const entityMetaSchema = z.custom<{[key: string]: any}>((value)=>{
+  return Array.isArray(value) || typeof value == "object";
+});
 export const contextSchema = z.union([
     z.literal("view"),
     z.literal("embed"),
