@@ -1,7 +1,11 @@
 import {z} from "zod";
 
-export const collectionResponseSchema = z.object({
-    data: z.array(z.any()),
-    total: z.number().gte(0),
-    totalPages: z.number().gte(0),
-});
+export const collectionResponseSchema = <ItemType extends z.ZodTypeAny>(
+    itemSchema: ItemType
+) => {
+    return  z.object({
+        data: itemSchema.array(),
+        total: z.number().gte(0),
+        totalPages: z.number().gte(0),
+    });
+}
