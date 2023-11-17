@@ -24,7 +24,7 @@ export const searchParamsAdd = (searchParams: URLSearchParams, params: SearchPar
 }
 
 export const searchParamsAddTaxonomyQuery = (searchParams: URLSearchParams, taxonomy: string, query: TaxonomyQuery) => {
-    const terms = typeof query.terms == "string" ? query.terms : query.terms.join(",");
+    const terms = Array.isArray(query.terms) ? query.terms.join(",") :  `${query.terms}`;
     searchParams.append(`${taxonomy}[operator]`, query.operator);
     searchParams.append(`${taxonomy}[terms]`, terms);
 }
