@@ -1,12 +1,16 @@
 import {z} from "zod";
-import {collectionResponseSchema} from "../schema";
-import {getPaginationHeaders} from "../util";
+import {getPaginationHeaders, isParseError, sustainingParse} from "../util";
 
-export const responseAsCollection = <Type extends z.ZodTypeAny>(
-    item: Type
+export const responseAsCollection = <Type extends z.ZodArray<any>>(
+    arraySchema: Type
 ) => async (res: Response) => {
-    return collectionResponseSchema(item).parse({
-        data: await res.json(),
+    const json =  await res.json();
+    const result = sustainingParse(json, arraySchema) ;
+    if(isParseError(result)){
+        return result;
+    }
+    return {
+        data: result as z.infer<typeof arraySchema>,
         ...getPaginationHeaders(res),
-    });
+    };
 }
