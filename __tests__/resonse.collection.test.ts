@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {responseAsCollection, isParseError} from "../src";
+import {responseAsCollection, isParseError, isError} from "../src";
 
 test("Should transform to collection response", async ()=>{
     const p: Promise<Response> = new Promise(resolve => {
@@ -24,7 +24,7 @@ test("Should transform to collection response", async ()=>{
     })
 });
 
-test("Should transform to collection with null", async ()=>{
+test("Should return validation error", async ()=>{
     const p: Promise<Response> = new Promise(resolve => {
         resolve({
             headers: {
@@ -40,4 +40,18 @@ test("Should transform to collection with null", async ()=>{
 
     const result = await p.then(responseAsCollection(z.number().array()))
     expect(isParseError(result)).toBeTruthy();
+});
+
+test("Should return error", async ()=>{
+    const p: Promise<Response> = new Promise(resolve => {
+        resolve({
+            async json(){
+                throw new Error("error");
+                return "false";
+            }
+        } as Response);
+    });
+
+    const result = await p.then(responseAsCollection(z.number().array()))
+    expect(isError(result)).toBeTruthy();
 });
