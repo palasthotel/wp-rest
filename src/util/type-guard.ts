@@ -8,3 +8,4 @@ export const isTaxonomyQueryArg = (arg: any): arg is TaxonomyQuery => {
 }
 
 export const isParseError = (parsed: any): parsed is z.ZodError => parsed instanceof z.ZodError;
+export const isError = (parsed: any): parsed is Error => parsed instanceof Error;
