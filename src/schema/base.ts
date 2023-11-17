@@ -50,5 +50,9 @@ export const contextSchema = z.union([
 export const taxonomyQuerySchema =
     z.object({
         operator: z.union([z.literal("AND"), z.literal("OR")]),
-        terms: z.array(z.number()).nonempty().or(z.string()),
+        terms: z.union([
+            z.array(z.number()).nonempty(),
+            z.string(),
+            z.number(),
+        ]),
     });
