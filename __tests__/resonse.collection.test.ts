@@ -1,6 +1,5 @@
-import {responseAsCollection} from "../src/response/collection";
 import {z} from "zod";
-import {isParseError} from "../src";
+import {responseAsCollection, isParseError} from "../src";
 
 test("Should transform to collection response", async ()=>{
     const p: Promise<Response> = new Promise(resolve => {
