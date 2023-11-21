@@ -9,12 +9,12 @@ export const userResponseSchema = z.object({
     link: z.string(),
     slug: userSlugSchema,
     avatar_urls: z.record(z.string()),
-    meta: entityMetaSchema,
+    meta: entityMetaSchema.optional(),
     _links: z.record(
         z.array(
             z.object({
                 href: z.string()
             })
         )
-    )
+    ).optional()
 });

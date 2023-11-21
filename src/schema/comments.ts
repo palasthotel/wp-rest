@@ -16,8 +16,8 @@ export const commentResponseSchema = z.object({
     post: postIdSchema,
     status: z.string(),
     type: z.string(),
-    author_avatar_urls: z.record(z.string()),
-    meta: entityMetaSchema,
+    author_avatar_urls: z.record(z.string()).optional(),
+    meta: entityMetaSchema.optional(),
     _links: z.record(
         z.array(
             z.object({
@@ -29,5 +29,5 @@ export const commentResponseSchema = z.object({
                 name: z.string().optional()
             })
         )
-    )
+    ).optional()
 })

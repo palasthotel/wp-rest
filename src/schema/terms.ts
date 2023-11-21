@@ -10,5 +10,5 @@ export const termResponseSchema = z.object({
     slug: z.string(),
     taxonomy: taxonomySlugSchema,
     parent: termIdSchema.optional(),
-    meta: entityMetaSchema
+    meta: entityMetaSchema.optional(),
 });

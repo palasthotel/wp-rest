@@ -1,5 +1,5 @@
 import {postResponseSchema} from "./posts";
-import {revisionIdSchema} from "./base";
+import {revisionIdSchema, revisionSlugSchema} from "./base";
 
 export const revisionResponseSchema = postResponseSchema.pick({
         author: true,
@@ -8,10 +8,10 @@ export const revisionResponseSchema = postResponseSchema.pick({
         guid: true,
         modified: true,
         parent: true,
-        slug: true,
         title: true,
         content: true,
         excerpt: true,
 }).extend({
-        id: revisionIdSchema
+        id: revisionIdSchema,
+        slug: revisionSlugSchema,
 })

@@ -18,7 +18,7 @@ export const postResponseSchema = z.object({
     date_gmt: postDateSchema, // posts, pages
     guid: z.object({ // posts, pages
         rendered: z.string()
-    }),
+    }).optional(),
     modified: postDateSchema, // posts, pages
     modified_gmt: postDateSchema, // posts, pages
     slug: postSlugSchema, // posts, pages
@@ -30,11 +30,11 @@ export const postResponseSchema = z.object({
     }),
     content: z.object({ // posts, pages
         rendered: z.string(),
-        protected: z.boolean()
+        protected: z.boolean().optional(),
     }).optional(),
     excerpt: z.object({ // posts, pages
         rendered: z.string(),
-        protected: z.boolean()
+        protected: z.boolean().optional(),
     }).optional(),
     author: authorIdSchema, // posts, pages
     featured_media: z.number().optional(), // posts, pages
@@ -57,5 +57,5 @@ export const postResponseSchema = z.object({
                 name: z.string().optional()
             })
         )
-    )
+    ).optional()
 });
