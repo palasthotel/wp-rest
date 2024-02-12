@@ -26,17 +26,17 @@ export const postResponseSchema = z.object({
     type: postTypeSchema, // posts, pages
     link: z.string(), // posts, pages
     title: z.object({ // posts, pages
-        rendered: z.string()
-    }),
+        rendered: z.string().optional(),
+    }).optional(),
     content: z.object({ // posts, pages
-        rendered: z.string(),
+        rendered: z.string().optional(),
         protected: z.boolean().optional(),
     }).optional(),
     excerpt: z.object({ // posts, pages
-        rendered: z.string(),
+        rendered: z.string().optional(),
         protected: z.boolean().optional(),
     }).optional(),
-    author: authorIdSchema, // posts, pages
+    author: authorIdSchema.optional(), // posts, pages
     featured_media: z.number().optional(), // posts, pages
     parent: postIdSchema.optional(), // pages
     comment_status: commentStatusSchema.optional(), // posts, pages
