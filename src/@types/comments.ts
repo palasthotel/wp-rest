@@ -1,6 +1,6 @@
 import {BaseRequestArgs, ComaSeparatedIds, CommentId, Context, PostId, UserId} from "./general";
 import {z} from "zod";
-import {commentResponseSchema} from "../schema";
+import {commentContextEditResponseSchema, commentCreateOrUpdateBodySchema, commentResponseSchema} from "../schema";
 
 export type GetCommentsRequestArgs = BaseRequestArgs & {
     context?: Context
@@ -26,9 +26,12 @@ export type GetCommentsRequestArgs = BaseRequestArgs & {
 }
 
 export type CommentResponse = z.infer<typeof commentResponseSchema>
+export type CommentContextEditResponse = z.infer<typeof commentContextEditResponseSchema>
 
 export type GetCommentByIdRequestArgs = BaseRequestArgs & {
     id: CommentId
     context?: Context
     password?: string
 }
+
+export type CommentCreateOrUpdateBody = z.infer<typeof commentCreateOrUpdateBodySchema>

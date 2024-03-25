@@ -18,3 +18,12 @@ export const userResponseSchema = z.object({
         )
     ).optional()
 });
+
+export const userContextEditResponseSchema = userResponseSchema.extend({
+    username: z.string(),
+    first_name: z.string(),
+    last_name: z.string(),
+    email: z.string(),
+    locale: z.string(),
+    nickname: z.string(),
+})

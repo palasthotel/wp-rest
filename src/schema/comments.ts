@@ -31,3 +31,25 @@ export const commentResponseSchema = z.object({
         )
     ).optional()
 })
+
+export const commentContextEditResponseSchema = commentResponseSchema.extend({
+    author_email: z.string(),
+    author_ip: z.string(),
+    author_user_agent: z.string(),
+});
+
+export const commentCreateOrUpdateBodySchema = z.object({
+    author: z.number(),
+    author_email: z.string(),
+    autor_ip: z.string(),
+    author_name: z.string(),
+    author_url: z.string(),
+    author_user_agent: z.string(),
+    content: z.string(),
+    date: z.string(),
+    date_gmt: z.string(),
+    parent: z.number(),
+    post: z.number(),
+    status: z.string(),
+    meta: entityMetaSchema
+});
