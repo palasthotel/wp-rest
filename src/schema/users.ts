@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {entityMetaSchema, userIdSchema, userSlugSchema} from "./base";
+import {entityMetaSchema, userCapabilitiesSchema, userIdSchema, userRoleSchema, userSlugSchema} from "./base";
 
 export const userResponseSchema = z.object({
     id: userIdSchema,
@@ -26,4 +26,23 @@ export const userContextEditResponseSchema = userResponseSchema.extend({
     email: z.string(),
     locale: z.string(),
     nickname: z.string(),
+    register_date: z.string(),
+    roles: userRoleSchema.array(),
+    capabilities: userCapabilitiesSchema,
+    extra_capabilities: userCapabilitiesSchema,
+});
+
+export const userCreateOrUpdateBodySchema = z.object({
+    username: z.string(),
+    name: z.string().optional(),
+    first_name: z.string().optional(),
+    last_name: z.string().optional(),
+    email: z.string().email(),
+    url: z.string().url().optional(),
+    description: z.string().optional(),
+    locale: z.string().optional(),
+    nickname: z.string().optional(),
+    slug: z.string().optional(),
+    roles: userRoleSchema.array().optional(),
+    meta: entityMetaSchema,
 })

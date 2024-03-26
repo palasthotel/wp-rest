@@ -29,6 +29,14 @@ export const revisionIdSchema = z.number();
 export const revisionSlugSchema = z.string();
 export const userIdSchema = z.number();
 export const userSlugSchema = z.string();
+export const userRoleSchema = z.union([
+    z.literal("subscriber"),
+    z.literal("contributor"),
+    z.literal("author"),
+    z.literal("editor"),
+    z.literal("administrator"),
+]);
+export const userCapabilitiesSchema = z.record(z.string(), z.boolean())
 export const authorIdSchema = userIdSchema;
 export const commentIdSchema = z.number();
 export const commentStatusSchema = z.union([

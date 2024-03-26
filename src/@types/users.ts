@@ -1,6 +1,6 @@
 import {BaseRequestArgs, Context, UserId} from "./general";
 import {z} from "zod";
-import {userContextEditResponseSchema, userResponseSchema} from "../schema";
+import {userContextEditResponseSchema, userCreateOrUpdateBodySchema, userResponseSchema} from "../schema";
 
 export type GetUsersRequestArgs = BaseRequestArgs & {
     page?: number
@@ -23,3 +23,5 @@ export type GetUserRequestArgs = BaseRequestArgs & {
     id: UserId
     context?: Context
 }
+
+export type UserCreateOrUpdateBody = z.infer<typeof userCreateOrUpdateBodySchema>
