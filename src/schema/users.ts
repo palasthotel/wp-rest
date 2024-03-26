@@ -32,17 +32,20 @@ export const userContextEditResponseSchema = userResponseSchema.extend({
     extra_capabilities: userCapabilitiesSchema,
 });
 
-export const userCreateOrUpdateBodySchema = z.object({
+export const userCreateBodySchema = z.object({
     username: z.string(),
-    name: z.string(),
-    first_name: z.string(),
-    last_name: z.string(),
+    name: z.string().optional(),
+    first_name: z.string().optional(),
+    last_name: z.string().optional(),
     email: z.string().email(),
-    url: z.string().url(),
-    description: z.string(),
-    locale: z.string(),
-    nickname: z.string(),
-    slug: z.string(),
-    roles: userRoleSchema.array(),
-    meta: z.record(z.string()),
-}).partial()
+    url: z.string().url().optional(),
+    description: z.string().optional(),
+    locale: z.string().optional(),
+    nickname: z.string().optional(),
+    slug: z.string().optional(),
+    roles: userRoleSchema.array().optional(),
+    password: z.string(),
+    meta: z.record(z.string()).optional(),
+});
+
+export const userUpdateBodySchema = userCreateBodySchema.partial()

@@ -38,7 +38,7 @@ export const commentContextEditResponseSchema = commentResponseSchema.extend({
     author_user_agent: z.string(),
 });
 
-export const commentCreateOrUpdateBodySchema = z.object({
+export const commentUpdateBodySchema = z.object({
     author: z.number(),
     author_email: z.string(),
     autor_ip: z.string(),
@@ -53,3 +53,5 @@ export const commentCreateOrUpdateBodySchema = z.object({
     status: z.string(),
     meta: z.record(z.string()),
 }).partial();
+
+export const commentCreateBodySchema = commentUpdateBodySchema;
