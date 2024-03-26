@@ -26,7 +26,7 @@ export const userContextEditResponseSchema = userResponseSchema.extend({
     email: z.string(),
     locale: z.string(),
     nickname: z.string(),
-    register_date: z.string(),
+    registered_date: z.string(),
     roles: userRoleSchema.array(),
     capabilities: userCapabilitiesSchema,
     extra_capabilities: userCapabilitiesSchema,
