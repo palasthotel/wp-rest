@@ -51,5 +51,5 @@ export const commentCreateOrUpdateBodySchema = z.object({
     parent: z.number(),
     post: z.number(),
     status: z.string(),
-    meta: entityMetaSchema
-});
+    meta: z.record(z.string()),
+}).partial();
