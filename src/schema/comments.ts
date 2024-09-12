@@ -41,7 +41,7 @@ export const commentContextEditResponseSchema = commentResponseSchema.extend({
 export const commentUpdateBodySchema = z.object({
     author: z.number(),
     author_email: z.string(),
-    autor_ip: z.string(),
+    author_ip: z.string(),
     author_name: z.string(),
     author_url: z.string(),
     author_user_agent: z.string(),
