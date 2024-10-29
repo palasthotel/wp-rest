@@ -4,3 +4,4 @@ export * from './posts.ts';
 export * from './revision.ts';
 export * from './terms.ts';
 export * from './users.ts';
+export * from './media.ts';
