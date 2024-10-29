@@ -1,6 +1,6 @@
 {
   "name": "@palasthotel/wp-rest",
-  "version": "0.7.5",
+  "version": "0.8.0",
   "description": "Types and request builder functions.",
   "type": "module",
   "main": "./dist/index.cjs",
