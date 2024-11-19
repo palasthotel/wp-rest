@@ -37,7 +37,7 @@ export const postResponseSchema = z.object({
         protected: z.boolean().optional(),
     }).optional(),
     author: authorIdSchema.optional(), // posts, pages
-    featured_media: z.number().optional(), // posts, pages
+    featured_media: z.coerce.number().optional(), // posts, pages
     parent: postIdSchema.optional(), // pages
     comment_status: commentStatusSchema.optional(), // posts, pages
     ping_status: pingStatusSchema.optional(), // posts, pages
@@ -45,14 +45,14 @@ export const postResponseSchema = z.object({
     template: z.string().optional(), // posts, pages
     format: postFormatSchema.optional(), // posts
     meta: entityMetaSchema.optional(), // posts, pages
-    categories: z.array(z.number()).optional(), // posts
-    tags: z.array(z.number()).optional(), // posts
+    categories: z.array(z.coerce.number()).optional(), // posts
+    tags: z.array(z.coerce.number()).optional(), // posts
     _links: z.record(  // posts, pages
         z.array(
             z.object({
                 href: z.string(),
                 embeddable: z.boolean().optional(),
-                count: z.number().optional(),
+                count: z.coerce.number().optional(),
                 taxonomy: z.string().optional(),
                 name: z.string().optional()
             })

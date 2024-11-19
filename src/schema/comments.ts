@@ -24,7 +24,7 @@ export const commentResponseSchema = z.object({
                 href: z.string(),
                 embeddable: z.boolean().optional(),
                 post_type: postTypeSchema.optional(),
-                count: z.number().optional(),
+                count: z.coerce.number().optional(),
                 taxonomy: z.string().optional(),
                 name: z.string().optional()
             })
@@ -39,7 +39,7 @@ export const commentContextEditResponseSchema = commentResponseSchema.extend({
 });
 
 export const commentUpdateBodySchema = z.object({
-    author: z.number(),
+    author: z.coerce.number(),
     author_email: z.string(),
     author_ip: z.string(),
     author_name: z.string(),
@@ -48,8 +48,8 @@ export const commentUpdateBodySchema = z.object({
     content: z.string(),
     date: z.string(),
     date_gmt: z.string(),
-    parent: z.number(),
-    post: z.number(),
+    parent: z.coerce.number(),
+    post: z.coerce.number(),
     status: z.string(),
     meta: z.record(z.string()),
 }).partial();

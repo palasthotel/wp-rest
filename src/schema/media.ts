@@ -3,17 +3,17 @@ import {entityMetaSchema, postDateSchema, postStatusSchema} from "./base.ts";
 
 const mediaSizeSchema = z.object({
     file: z.string(),
-    width: z.number(),
-    height: z.number(),
+    width: z.coerce.number(),
+    height: z.coerce.number(),
     mime_type: z.string(),
     source_url: z.string(),
 }).optional();
 
 const mediaDetailsSchema = z.object({
-    width: z.number(),
-    height: z.number(),
+    width: z.coerce.number(),
+    height: z.coerce.number(),
     file: z.string(),
-    filesize: z.number().optional(),
+    filesize: z.coerce.number().optional(),
     sizes: z.record(
         z.string(),
         mediaSizeSchema
@@ -40,7 +40,7 @@ const renderedFieldSchema = z.object({
 });
 
 export const mediaResponseSchema = z.object({
-    id: z.number(),
+    id: z.coerce.number(),
     date: postDateSchema,
     date_gmt: postDateSchema,
     guid: renderedFieldSchema,
@@ -51,7 +51,7 @@ export const mediaResponseSchema = z.object({
     type: z.literal('attachment'),
     link: z.string().url(),
     title: renderedFieldSchema,
-    author: z.number(),
+    author: z.coerce.number(),
     comment_status: z.enum(['open', 'closed']),
     ping_status: z.enum(['open', 'closed']),
     template: z.string().nullable(),
@@ -70,7 +70,7 @@ export const mediaResponseSchema = z.object({
             z.object({
                 href: z.string(),
                 embeddable: z.boolean().optional(),
-                count: z.number().optional(),
+                count: z.coerce.number().optional(),
                 taxonomy: z.string().optional(),
                 name: z.string().optional()
             })

@@ -1,6 +1,6 @@
 import {z} from "zod";
 export const postDateSchema = z.string();
-export const postIdSchema = z.number();
+export const postIdSchema = z.coerce.number();
 export const postSlugSchema = z.string();
 export const postTypeSchema = z.string();
 export const postStatusSchema = z.union([
@@ -25,9 +25,9 @@ export const postFormatSchema = z.union([
     z.literal("video"),
     z.literal("audio"),
 ]);
-export const revisionIdSchema = z.number();
+export const revisionIdSchema = z.coerce.number();
 export const revisionSlugSchema = z.string();
-export const userIdSchema = z.number();
+export const userIdSchema = z.coerce.number();
 export const userSlugSchema = z.string();
 export const userRoleSchema = z.union([
     z.literal("subscriber"),
@@ -38,14 +38,14 @@ export const userRoleSchema = z.union([
 ]);
 export const userCapabilitiesSchema = z.record(z.string(), z.boolean())
 export const authorIdSchema = userIdSchema;
-export const commentIdSchema = z.number();
+export const commentIdSchema = z.coerce.number();
 export const commentStatusSchema = z.union([
     z.literal("open"),
     z.literal("closed"),
 ]);
 export const pingStatusSchema = commentStatusSchema;
 export const comaSeparatedIdsSchema = z.string();
-export const termIdSchema = z.number();
+export const termIdSchema = z.coerce.number();
 export const taxonomySlugSchema = z.string();
 export const entityMetaSchema = z.custom<{[key: string]: any}>((value)=>{
   return Array.isArray(value) || typeof value == "object";
@@ -59,8 +59,8 @@ export const taxonomyQuerySchema =
     z.object({
         operator: z.union([z.literal("AND"), z.literal("OR")]),
         terms: z.union([
-            z.array(z.number()).nonempty(),
+            z.array(z.coerce.number()).nonempty(),
             z.string(),
-            z.number(),
+            z.coerce.number(),
         ]),
     });

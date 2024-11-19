@@ -3,7 +3,7 @@ import {entityMetaSchema, taxonomySlugSchema, termIdSchema} from "./base";
 
 export const termResponseSchema = z.object({
     id: termIdSchema,
-    count: z.number(),
+    count: z.coerce.number(),
     description: z.string(),
     link: z.string(),
     name: z.string(),
