@@ -32,7 +32,7 @@ const mediaDetailsSchema = z.object({
         orientation: z.string(),
         keywords: z.array(z.string()),
     }).optional(),
-});
+}).partial();
 
 const renderedFieldSchema = z.object({
     rendered: z.string(),
