@@ -40,7 +40,6 @@ export const userCapabilitiesSchema = z.record(z.string(), z.boolean())
 export const authorIdSchema = userIdSchema;
 export const commentIdSchema = z.coerce.number();
 export const commentStatusSchema = z.union([
-    z.literal(""),
     z.literal("open"),
     z.literal("closed"),
 ]);
