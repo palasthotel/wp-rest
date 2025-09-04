@@ -59,7 +59,7 @@ export const taxonomyQuerySchema =
     z.object({
         operator: z.union([z.literal("AND"), z.literal("OR")]),
         terms: z.union([
-            z.array(z.coerce.number()).nonempty(),
+            z.array(z.coerce.number()).min(1),
             z.string(),
             z.coerce.number(),
         ]),

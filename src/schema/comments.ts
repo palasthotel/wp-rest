@@ -16,9 +16,10 @@ export const commentResponseSchema = z.object({
     post: postIdSchema,
     status: z.string(),
     type: z.string(),
-    author_avatar_urls: z.record(z.string()).optional(),
+    author_avatar_urls: z.record(z.string(), z.string()).optional(),
     meta: entityMetaSchema.optional(),
     _links: z.record(
+        z.string(),
         z.array(
             z.object({
                 href: z.string(),
@@ -51,7 +52,7 @@ export const commentUpdateBodySchema = z.object({
     parent: z.coerce.number(),
     post: z.coerce.number(),
     status: z.string(),
-    meta: z.record(z.string()),
+    meta: z.record(z.string(), z.string()),
 }).partial();
 
 export const commentCreateBodySchema = commentUpdateBodySchema;
