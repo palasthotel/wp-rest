@@ -8,9 +8,10 @@ export const userResponseSchema = z.object({
     description: z.string(),
     link: z.string(),
     slug: userSlugSchema,
-    avatar_urls: z.record(z.string()),
+    avatar_urls: z.record(z.string(), z.string()),
     meta: entityMetaSchema.optional(),
     _links: z.record(
+        z.string(),
         z.array(
             z.object({
                 href: z.string()
@@ -45,7 +46,7 @@ export const userCreateBodySchema = z.object({
     slug: z.string().optional(),
     roles: userRoleSchema.array().optional(),
     password: z.string(),
-    meta: z.record(z.string()).optional(),
+    meta: z.record(z.string(), z.string()).optional(),
 });
 
 export const userUpdateBodySchema = userCreateBodySchema.partial()

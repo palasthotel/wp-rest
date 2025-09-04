@@ -48,6 +48,7 @@ export const postResponseSchema = z.object({
     categories: z.array(z.coerce.number()).optional(), // posts
     tags: z.array(z.coerce.number()).optional(), // posts
     _links: z.record(  // posts, pages
+        z.string(),
         z.array(
             z.object({
                 href: z.string(),

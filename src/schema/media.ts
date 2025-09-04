@@ -66,6 +66,7 @@ export const mediaResponseSchema = z.object({
     source_url: z.string().url(),
     missing_image_sizes: z.array(z.string()).optional(),
     _links: z.record(
+        z.string(),
         z.array(
             z.object({
                 href: z.string(),
