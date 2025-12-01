@@ -52,7 +52,7 @@ export const mediaResponseSchema = z.object({
     link: z.string().url(),
     title: renderedFieldSchema,
     author: z.coerce.number(),
-    comment_status: z.enum(['open', 'closed']),
+    comment_status: z.enum(['open', 'closed']).or(z.literal('')),
     ping_status: z.enum(['open', 'closed']),
     template: z.string().nullable(),
     meta: entityMetaSchema.optional(),
