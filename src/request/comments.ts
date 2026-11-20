@@ -1,5 +1,6 @@
 import {GetCommentByIdRequestArgs, GetCommentsRequestArgs} from "../@types";
 import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getCommentsRequest = <T extends GetCommentsRequestArgs>( args: T ) => {
     const {
@@ -23,7 +24,7 @@ export const getCommentRequest = (
         ...rest
     } = args;
 
-    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/comments/${id}`);
+    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/comments/${pathSegment(id)}`);
 
     searchParamsAdd(url.searchParams, rest as SearchParamable);
 

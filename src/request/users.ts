@@ -1,5 +1,6 @@
 import {GetUserRequestArgs, GetUsersRequestArgs} from "../@types";
 import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getUsersRequest = <T extends GetUsersRequestArgs>(args: T): URL => {
 
@@ -22,5 +23,5 @@ export const getUserRequest = (
         baseUrl,
         id,
     } = args;
-    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/users/${id}`);
+    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/users/${pathSegment(id)}`);
 }
