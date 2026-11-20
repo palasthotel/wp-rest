@@ -1,6 +1,6 @@
 {
   "name": "@palasthotel/wp-rest",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Zod schemas, types and request builders for the WordPress REST API.",
   "keywords": [
     "wordpress",
