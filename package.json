@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/palasthotel/wp-rest.git"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "author": "Palasthotel",
   "type": "module",
   "main": "./dist/index.cjs",

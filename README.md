@@ -95,4 +95,6 @@ Releases up to 1.0.2 were tagged without the `v` (`1.0.2`).
 
 ## License
 
-[MIT](LICENSE)
+[GPL-3.0-or-later](LICENSE), from version 2.0.0 on.
+
+The 1.x versions were published under the MIT license and remain available under it.
