@@ -1,5 +1,6 @@
 import {GetTermByIdRequestArgs, GetTermsRequestArgs} from "../@types";
 import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getTermsRequest = <T extends GetTermsRequestArgs>(args: T): URL => {
     const {
@@ -8,7 +9,7 @@ export const getTermsRequest = <T extends GetTermsRequestArgs>(args: T): URL => 
         ...rest
     } = args;
 
-    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${taxonomy}`);
+    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(taxonomy)}`);
 
     searchParamsAdd(url.searchParams, rest as SearchParamable);
 
@@ -21,5 +22,5 @@ export const getTermRequest = (args: GetTermByIdRequestArgs)=> {
         taxonomy = "categories",
         id,
     } = args;
-    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${taxonomy}/${id}`);
+    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(taxonomy)}/${pathSegment(id)}`);
 }

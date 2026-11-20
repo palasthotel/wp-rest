@@ -1,5 +1,6 @@
 import {GetRevisionByIdRequestArgs, GetRevisionsRequestArgs} from "../@types";
 import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getRevisionsRequest = ( args: GetRevisionsRequestArgs) => {
     const {
@@ -9,7 +10,7 @@ export const getRevisionsRequest = ( args: GetRevisionsRequestArgs) => {
         ...rest
     } = args;
 
-    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}/${post}/revisions`);
+    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(type)}/${pathSegment(post)}/revisions`);
 
     searchParamsAdd(url.searchParams, rest as SearchParamable);
 
@@ -24,5 +25,5 @@ export const getRevisionByIdRequest = (args: GetRevisionByIdRequestArgs) => {
         revision,
     } = args;
 
-    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}/${post}/revisions/${revision}`);
+    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(type)}/${pathSegment(post)}/revisions/${pathSegment(revision)}`);
 }

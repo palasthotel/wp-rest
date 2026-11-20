@@ -1,5 +1,6 @@
 import {GetMediaByIdRequestArgs, GetMediaRequestArgs} from "../@types";
 import {SearchParamable, searchParamsAdd, trimEndSlash} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getMediaItemsRequest = <T extends GetMediaRequestArgs>(args: T): URL => {
 
@@ -22,5 +23,5 @@ export const getMediaRequest = (
         baseUrl,
         id,
     } = args;
-    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/media/${id}`);
+    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/media/${pathSegment(id)}`);
 }

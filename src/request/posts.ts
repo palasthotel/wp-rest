@@ -1,5 +1,6 @@
 import {GetPostByIdRequestArgs, GetPostsRequestArgs} from "../@types";
 import {trimEndSlash, SearchParamable, searchParamsAdd} from "../util";
+import {pathSegment} from "./path-segment";
 
 export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => {
 
@@ -9,7 +10,7 @@ export const getPostsRequest = <T extends GetPostsRequestArgs>(args: T): URL => 
         ...rest
     } = args;
 
-    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}`);
+    const url = new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(type)}`);
 
     searchParamsAdd(url.searchParams, rest as SearchParamable);
 
@@ -24,5 +25,5 @@ export const getPostRequest = (
         type = "posts",
         id,
     } = args;
-    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${type}/${id}`);
+    return new URL(`${trimEndSlash(baseUrl)}/wp-json/wp/v2/${pathSegment(type)}/${pathSegment(id)}`);
 }
