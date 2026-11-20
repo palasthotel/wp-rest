@@ -1,0 +1,21 @@
+name: Release Please
+
+# Opens and updates the release PR from conventional commits, and tags v<version> when
+# it is merged. The tag, pushed with the release bot's token, starts publish.yml and
+# sbom.yml.
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    uses: palasthotel/github-workflows/.github/workflows/wp-plugin-release-please.yml@v1
+    with:
+      app-id: ${{ vars.RELEASE_BOT_APP_ID }}
+    secrets:
+      RELEASE_BOT_PRIVATE_KEY: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}

@@ -1,3 +1,7 @@
 /.idea
+/.vscode
+.DS_Store
 /node_modules
+# compiled output - built by the pipeline, never committed
 /dist
+/*.tgz

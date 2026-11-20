@@ -1,0 +1,46 @@
+name: PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Lint, test, build, pack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - run: npm ci
+
+      # Only what lands at the consumers - the toolchain is not shipped
+      - name: Audit the runtime dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      # tsdown does not check the types, tsc does
+      - run: npm run lint
+
+      - run: npm test
+
+      - run: npm run build
+
+      # The files package.json "exports" points to: a renamed output fails here, not
+      # in the projects that import the package
+      - name: Check the entry points
+        run: |
+          for file in dist/index.js dist/index.cjs dist/index.d.ts dist/index.d.cts; do
+            [[ -f "$file" ]] || { echo "::error::$file is missing"; exit 1; }
+          done
+          node -e 'const m = require("./dist/index.cjs"); if (!Object.keys(m).length) process.exit(1)'
+          node --input-type=module -e 'const m = await import("./dist/index.js"); if (!Object.keys(m).length) process.exit(1)'
+
+      - name: Show what would be published
+        run: npm pack --dry-run
