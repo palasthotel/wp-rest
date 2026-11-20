@@ -1,0 +1,84 @@
+---
+# Based on the template of palasthotel/github-workflows (dependabot/bin/generate.sh) -
+# schedule, cooldown and the github-actions entry as there. Different for npm, because
+# this is a library and not a plugin:
+#
+# - The runtime dependencies (zod) are what consumers install with the package. Raising
+#   their minimum is a release: "fix(deps): ...", versioning-strategy increase, so the
+#   range in package.json moves and not only the lock file.
+# - The devDependencies never reach a consumer: "chore(deps-dev): ...", no release.
+#
+# The groups are split by dependency-type for the same reason: a group PR has one commit
+# message, and a toolchain bump must not come out as fix.
+version: 2
+
+updates:
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Berlin"
+    assignees:
+      - "JanaME"
+    versioning-strategy: "increase"
+    commit-message:
+      prefix: "fix"
+      prefix-development: "chore"
+      include: "scope"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+      exclude:
+        - "@palasthotel/*"
+    groups:
+      # Everything without a major step. A major version gets a pull request of its own,
+      # so it is built and looked at alone.
+      runtime:
+        patterns:
+          - "*"
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development:
+        patterns:
+          - "*"
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      runtime-security:
+        patterns:
+          - "*"
+        applies-to: "security-updates"
+        dependency-type: "production"
+      development-security:
+        patterns:
+          - "*"
+        applies-to: "security-updates"
+        dependency-type: "development"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Berlin"
+    assignees:
+      - "JanaME"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+      exclude:
+        - "palasthotel/*"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
