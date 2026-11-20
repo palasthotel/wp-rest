@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "15ee8e2092850d08b19f7f97e27957225c5fd993",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "@palasthotel/wp-rest",
+      "changelog-path": "CHANGELOG.md",
+      "include-component-in-tag": false,
+      "include-v-in-tag": true,
+      "bump-minor-pre-major": false,
+      "changelog-sections": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fixes" },
+        { "type": "perf", "section": "Performance" },
+        { "type": "deps", "section": "Dependencies", "hidden": true },
+        { "type": "docs", "section": "Documentation", "hidden": true },
+        { "type": "refactor", "section": "Code Refactoring", "hidden": true },
+        { "type": "build", "section": "Build", "hidden": true },
+        { "type": "ci", "section": "CI", "hidden": true },
+        { "type": "test", "section": "Tests", "hidden": true },
+        { "type": "chore", "section": "Miscellaneous", "hidden": true }
+      ]
+    }
+  }
+}

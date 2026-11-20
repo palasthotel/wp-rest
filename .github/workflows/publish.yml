@@ -1,0 +1,84 @@
+name: Publish
+
+# Publishes a release to npmjs.org and to GitHub Packages. Started by the v<version> tag
+# that release-please pushes when the release PR is merged.
+#
+# npmjs.org: trusted publishing - the job's OIDC token is exchanged for a one-time
+# publish token, so there is no npm token stored anywhere, and npm attaches a provenance
+# attestation. The trusted publisher on npmjs.org names this repository and this file:
+# renaming the file breaks the publish.
+#
+# GitHub Packages: the job's GITHUB_TOKEN with packages: write.
+#
+# Each registry is skipped when it has the version already, so a failed run can be
+# re-run as a whole.
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    env:
+      TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Version from the tag
+        run: |
+          VERSION="${TAG#v}"
+          PACKAGE_VERSION="$(node -p 'require("./package.json").version')"
+          [[ "$VERSION" == "$PACKAGE_VERSION" ]] || {
+            echo "::error::Tag $TAG does not match package.json version $PACKAGE_VERSION"
+            exit 1
+          }
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "NAME=$(node -p 'require("./package.json").name')" >> "$GITHUB_ENV"
+
+      - run: npm ci
+
+      - run: npm audit --omit=dev --audit-level=high
+
+      - run: npm run lint
+
+      - run: npm test
+
+      - run: npm run build
+
+      # --ignore-scripts: built above, prepublishOnly is for publishing by hand
+      - name: Publish to npmjs.org
+        run: |
+          if npm view "$NAME@$VERSION" version --registry https://registry.npmjs.org/ >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is on npmjs.org already"
+          else
+            npm publish --ignore-scripts --registry https://registry.npmjs.org/
+          fi
+
+      - name: Publish to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # npm reads the token from the environment, it is not written to the file
+          echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
+          if npm view "$NAME@$VERSION" version --registry https://npm.pkg.github.com/ >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is on GitHub Packages already"
+          else
+            npm publish --ignore-scripts --registry https://npm.pkg.github.com/
+          fi
