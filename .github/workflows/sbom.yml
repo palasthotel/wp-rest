@@ -46,9 +46,11 @@ jobs:
         with:
           ref: refs/tags/${{ env.TAG }}
 
+      # Not .nvmrc: the tags from before release-please have none, and the SBOM tool
+      # only needs a current Node
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.x
+          node-version: lts/*
 
       # --package-lock-only: nothing is installed, no install script runs
       - name: Write the SBOM

@@ -44,3 +44,19 @@ jobs:
 
       - name: Show what would be published
         run: npm pack --dry-run
+
+  # Development runs on the Node of .nvmrc; the projects that install the package may
+  # run an older one. The tests on the oldest maintained LTS catch an API it lacks.
+  test-oldest-lts:
+    name: Test on Node 22
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+
+      - run: npm ci
+
+      - run: npm test
